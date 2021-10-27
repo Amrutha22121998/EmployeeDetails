@@ -42,10 +42,10 @@ public class Delete extends MainServlet {
 			e.printStackTrace();
 			logger.error("Sorry, something wrong!", e);
 			result.put("Message", "Error!");
-		}
+		}finally {
 		JDBC.closeStatement(ps);
 		JDBC.closeConnection(connection);
-		logger.info("Connection closed");
+		logger.info("Connection closed");}
 
 		return result;
 	}

@@ -27,9 +27,9 @@ public class Create extends MainServlet {
 			String SQLINSERT = "insert into Employee (Name,Designation,Qualification,Status,Salary) values(?,?,?,?,?)";
 			ps = connection.prepareStatement(SQLINSERT);
 			ps.setString(1, req.getString("Name"));
-			ps.setString(2,req.getString("Designation"));
+			ps.setString(2, req.getString("Designation"));
 			ps.setString(3, req.getString("Qualification"));
-			ps.setString(4,  req.getString("Status"));
+			ps.setString(4, req.getString("Status"));
 			ps.setInt(5, req.getInt("Salary"));
 			int executeUpdate = ps.executeUpdate();
 			if (executeUpdate > 0) {
@@ -49,10 +49,11 @@ public class Create extends MainServlet {
 			e.printStackTrace();
 			logger.error("Sorry, something wrong!", e);
 			result.put("Message", "Error!");
+		} finally {
+			JDBC.closeStatement(ps);
+			JDBC.closeConnection(connection);
+			logger.info("Connection closed");
 		}
-		JDBC.closeStatement(ps);
-		JDBC.closeConnection(connection);
-		logger.info("Connection closed");
 
 		return result;
 	}

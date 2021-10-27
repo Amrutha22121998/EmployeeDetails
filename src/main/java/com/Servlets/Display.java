@@ -25,7 +25,7 @@ public class Display extends MainServlet {
 
 		try {
 			connection = JDBC.getConnection();
-
+			logger.info("Database Connected");
 			String SQLINSERT = "SELECT * FROM Employee";
 
 			ps = connection.prepareStatement(SQLINSERT);
@@ -54,10 +54,11 @@ public class Display extends MainServlet {
 
 			response.put("Message", "Something went wrong!");
 
+		} finally {
+			JDBC.closeStatement(ps);
+			JDBC.closeConnection(connection);
+			logger.info("Connection closed");
 		}
-		JDBC.closeStatement(ps);
-		JDBC.closeConnection(connection);
-		logger.info("Connection closed");
 
 		return response;
 

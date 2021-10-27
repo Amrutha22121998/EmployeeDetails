@@ -21,29 +21,22 @@ public class JDBC {
 		try {
 			ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/Servletdb");
-//			 con = ds.getConnection();
-//
-//			System.out.println("connected");
-
-
 		} catch (NamingException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
-	
 	public static Connection getConnection() throws SQLException {
-//		Connection c=ds.getConnection();
-//		System.out.println("Opening datasource connection : " + System.identityHashCode(c));
-//		return c;
-		return ds.getConnection();
+		
+			con = ds.getConnection();
+			return con;
 	}
+
 	public static void closeConnection(Connection con) {
 
 		if (con != null) {
 			try {
 				con.close();
-				System.out.println("connection closed");
 			} catch (SQLException e) {
 				e.printStackTrace();
 
